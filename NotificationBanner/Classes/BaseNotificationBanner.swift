@@ -17,7 +17,6 @@
  */
 
 import UIKit
-import SnapKit
 
 #if CARTHAGE_CONFIG
     import MarqueeLabelSwift
@@ -168,46 +167,41 @@ public class BaseNotificationBanner: UIView {
     
     private func createBannerConstraints(for bannerPosition: BannerPosition) {
         
-        spacerView.snp.remakeConstraints { (make) in
-            if bannerPosition == .top {
-                make.top.equalToSuperview().offset(-10)
-            } else {
-                make.bottom.equalToSuperview().offset(10)
-            }
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
-            updateSpacerViewHeight(make: make)
+        
+        
+        if bannerPosition == .top {
+            spacerView.topAnchor.constraint(equalTo: self.topAnchor, constant: -10).isActive = true
+        } else {
+            spacerView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 10).isActive = true
         }
+        spacerView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+        spacerView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
 
-        contentView.snp.remakeConstraints { (make) in
-            if bannerPosition == .top {
-                make.top.equalTo(spacerView.snp.bottom)
-                make.bottom.equalToSuperview()
-            } else {
-                make.top.equalToSuperview()
-                make.bottom.equalTo(spacerView.snp.top)
-            }
-            
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
+        updateSpacerViewHeight(view: spacerView)
+        
+        if bannerPosition == .top {
+            contentView.topAnchor.constraint(equalTo: spacerView.bottomAnchor).isActive = true
+            contentView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        } else {
+            contentView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+            contentView.bottomAnchor.constraint(equalTo: spacerView.topAnchor).isActive = true
         }
-
+        contentView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+        contentView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
     }
     
     /**
          Updates the spacer view height. Specifically used for orientation changes.
      */
     
-    private func updateSpacerViewHeight(make: ConstraintMaker? = nil) {
+    private func updateSpacerViewHeight(view: UIView? = nil) {
         let finalHeight = NotificationBannerUtilities.isiPhoneX()
             && UIApplication.shared.statusBarOrientation.isPortrait
             && parentViewController == nil ? 40.0 : 10.0
-        if let make = make {
-            make.height.equalTo(finalHeight)
+        if let view = view {
+            view.heightAnchor.constraint(equalToConstant: finalHeight).isActive = true
         } else {
-            spacerView.snp.updateConstraints({ (make) in
-                make.height.equalTo(finalHeight)
-            })
+            vspacerViewiew.heightAnchor.constraint(equalToConstant: finalHeight).isActive = true
         }
     }
     
