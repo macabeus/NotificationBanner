@@ -82,7 +82,7 @@ public class NotificationBanner: BaseNotificationBanner {
         
         titleLabel = MarqueeLabel()
         titleLabel!.type = .left
-        titleLabel!.font = UIFont.systemFont(ofSize: 17.5, weight: UIFont.Weight.bold)
+        titleLabel!.font = UIFont.systemFont(ofSize: 17.5, weight: UIFontWeightBold)
         titleLabel!.textColor = .white
         titleLabel!.text = title
         labelsView.addSubview(titleLabel!)
@@ -127,7 +127,6 @@ public class NotificationBanner: BaseNotificationBanner {
         
         if let subtitleLabel = subtitleLabel {
             labelsView.bottomAnchor.constraint(equalTo: subtitleLabel.bottomAnchor).isActive = true
-            make.bottom.equalTo(subtitleLabel)
         } else {
             labelsView.bottomAnchor.constraint(equalTo: titleLabel!.bottomAnchor).isActive = true
         }

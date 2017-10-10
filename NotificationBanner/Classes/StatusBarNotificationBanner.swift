@@ -46,17 +46,15 @@ public class StatusBarNotificationBanner: BaseNotificationBanner {
         titleLabel = MarqueeLabel()
         titleLabel?.animationDelay = 2
         titleLabel?.type = .leftRight
-        titleLabel!.font = UIFont.systemFont(ofSize: 12.5, weight: UIFont.Weight.bold)
+        titleLabel!.font = UIFont.systemFont(ofSize: 12.5, weight: UIFontWeightBold)
         titleLabel!.textAlignment = .center
         titleLabel!.textColor = .white
         contentView.addSubview(titleLabel!)
         
-        titleLabel!.snp.makeConstraints { (make) in
-            make.top.equalToSuperview()
-            make.left.equalToSuperview().offset(5)
-            make.right.equalToSuperview().offset(-5)
-            make.bottom.equalToSuperview()
-        }
+        titleLabel!.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        titleLabel!.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 5).isActive = true
+        titleLabel!.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -5).isActive = true
+        titleLabel!.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
 
         updateMarqueeLabelsDurations()
     }

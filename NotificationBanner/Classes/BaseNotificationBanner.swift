@@ -195,13 +195,13 @@ public class BaseNotificationBanner: UIView {
      */
     
     private func updateSpacerViewHeight(view: UIView? = nil) {
-        let finalHeight = NotificationBannerUtilities.isiPhoneX()
+        let finalHeight: CGFloat = NotificationBannerUtilities.isiPhoneX()
             && UIApplication.shared.statusBarOrientation.isPortrait
             && parentViewController == nil ? 40.0 : 10.0
         if let view = view {
             view.heightAnchor.constraint(equalToConstant: finalHeight).isActive = true
         } else {
-            vspacerViewiew.heightAnchor.constraint(equalToConstant: finalHeight).isActive = true
+            spacerView.heightAnchor.constraint(equalToConstant: finalHeight).isActive = true
         }
     }
     
